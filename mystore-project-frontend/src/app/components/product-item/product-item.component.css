@@ -1,0 +1,39 @@
+.product-image {
+  list-style-type: none;
+  width: 290px;
+  padding: 20px;
+  margin: 6px 6px;
+  border: 1px solid #33b5e5;
+}
+
+.product-container {
+  margin-top: 64px;
+  display: inline-flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+}
+
+.select-dropdown {
+  margin-bottom: 10px;
+  width: 108px;
+  border: solid 1px lightgrey;
+  border-radius: 0.25rem;
+  padding: 0.375rem 2.25rem 0.375rem 0.75rem;
+}
+
+h6 {
+  padding-top: 5px;
+}
+
+.select-input {
+  width: 108px;
+  margin-bottom: 8px;
+}
+
+.add-product-to-cart-spinner {
+  font-size: 24px;
+  color: white;
+}

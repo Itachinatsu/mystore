@@ -1,0 +1,21 @@
+.product-index {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 64px;
+  width: 100%;
+  align-items: center;
+}
+
+.product-index-error {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 64px;
+}
+
+.product-item {
+  display: flex;
+  justify-content: center;
+}

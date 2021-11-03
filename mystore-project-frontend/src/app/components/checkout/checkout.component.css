@@ -1,0 +1,22 @@
+h4 {
+  display: flex;
+  justify-content: center;
+  margin-top: 64px;
+}
+
+p {
+  display: flex;
+  justify-content: center;
+}
+
+.payment-checkout-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.payment-checkout-panel {
+  margin-left: 50px;
+  margin-right: 50px;
+}

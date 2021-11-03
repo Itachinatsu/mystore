@@ -1,0 +1,42 @@
+h5 {
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.togglePassword {
+  font-size: smaller;
+  margin-left: 340px;
+  margin-top: -24px;
+  cursor: pointer;
+}
+
+.signin-form {
+  display: grid;
+  position: relative;
+  width: 380px;
+}
+
+.signin-info {
+  display: grid;
+  margin-bottom: 20px;
+}
+
+.error-message {
+  color: red;
+  font-size: smaller;
+  font-weight: bolder;
+  margin-bottom: 20px;
+  margin-top: -10px;
+}
+
+.system-error-message {
+  color: red;
+  font-size: smaller;
+  font-weight: bolder;
+  margin-top: 5px;
+}
+
+.signin-spinner {
+  font-size: 24px;
+  color: white;
+}

@@ -1,0 +1,19 @@
+<h4>Your Shopping Cart</h4>
+<div class="cart-container" *ngIf="cartItems.length > 0">
+  <div class="cart-panel">
+    <app-cart-item
+      *ngFor="let cartItem of cartItems"
+      [cartItem]="cartItem"
+      class="cart-item"
+      (updateCartQuantity)="updateCartQuantity()"
+      (removeCartItem)="removeCartItem($event)"
+    ></app-cart-item>
+    <p class="total-cart-amount">Total: {{ totalCartAmount | currency }}</p>
+    <button class="btn btn-primary checkout-button" routerLink="/checkout">
+      Proceed to checkout
+    </button>
+  </div>
+</div>
+<div class="empty-cart-message" *ngIf="cartItems.length == 0">
+  Cart is empty.
+</div>

@@ -1,0 +1,20 @@
+<img class="product-image" src="{{ cartItem.product.url }}" />
+<div class="cart-item-details">
+  <h6>{{ cartItem.product.name }}</h6>
+  <p>{{ cartItem.product.price | currency }}</p>
+  <div>
+    <label>Quantity:</label>
+    <input
+      type="number"
+      class="number-input"
+      [(ngModel)]="cartItem.quantity"
+      (ngModelChange)="updateCartItem()"
+      min="1"
+    />
+  </div>
+  <div class="remove-cart-item">
+    <a class="remove-cart-item-link" (click)="removeFromCart()">
+      &times; Remove
+    </a>
+  </div>
+</div>

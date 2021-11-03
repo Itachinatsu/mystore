@@ -1,0 +1,23 @@
+<app-header
+  [totalCartQuantity]="totalCartQuantity"
+  [userIsLoggedIn]="userIsLoggedIn"
+  (userLoggedOut)="userLoggedOut()"
+></app-header>
+
+<div
+  class="margins"
+  (cart-updated)="cartUpdated()"
+  (user-logged-in)="userLoggedIn()"
+>
+  <router-outlet></router-outlet>
+</div>
+
+<ngx-spinner
+  name="signout-spinner"
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="cog"
+>
+  <p class="signout-spinner">Signing out...</p>
+</ngx-spinner>

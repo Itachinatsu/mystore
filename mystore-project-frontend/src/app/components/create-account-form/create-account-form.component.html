@@ -1,0 +1,122 @@
+<h5>Create an account</h5>
+<form
+  class="create-account-form"
+  #createAccountForm="ngForm"
+  (ngSubmit)="submitForm()"
+>
+  <div class="create-account-info">
+    <label>First name:</label>
+    <input
+      type="text"
+      name="firstName"
+      placeholder="Enter your first name (minimum 3 characters)"
+      [(ngModel)]="firstName"
+      required
+      minlength="3"
+      #createAccountFirstName="ngModel"
+    />
+  </div>
+  <div *ngIf="createAccountFirstName.invalid && createAccountFirstName.dirty">
+    <div
+      *ngIf="
+        createAccountFirstName.errors && createAccountFirstName.errors.required
+      "
+      class="error-message"
+    >
+      Please provide your first name.
+    </div>
+    <div
+      *ngIf="
+        createAccountFirstName.errors && createAccountFirstName.errors.minlength
+      "
+      class="error-message"
+    >
+      The first name must contain at least 3 characters.
+    </div>
+  </div>
+  <div class="create-account-info">
+    <label>Last name:</label>
+    <input
+      type="text"
+      name="lastName"
+      placeholder="Enter your last name (minimum 3 characters)"
+      [(ngModel)]="lastName"
+      required
+      minlength="3"
+      #createAccountLastName="ngModel"
+    />
+  </div>
+  <div *ngIf="createAccountLastName.invalid && createAccountLastName.dirty">
+    <div
+      *ngIf="
+        createAccountLastName.errors && createAccountLastName.errors.required
+      "
+      class="error-message"
+    >
+      Please provide your last name.
+    </div>
+    <div
+      *ngIf="
+        createAccountLastName.errors && createAccountLastName.errors.minlength
+      "
+      class="error-message"
+    >
+      The last name must contain at least 3 characters.
+    </div>
+  </div>
+  <div class="create-account-info">
+    <label>Password:</label>
+    <input
+      [type]="hidePassword ? 'password' : 'text'"
+      name="password"
+      placeholder="Enter your password (8-16 characters)"
+      [(ngModel)]="password"
+      required
+      minlength="8"
+      maxlength="16"
+      #createAccountPassword="ngModel"
+    /><span class="togglePassword" (click)="togglePassword()">{{
+      hidePassword ? "Show" : "Hide"
+    }}</span>
+  </div>
+  <div *ngIf="createAccountPassword.invalid && createAccountPassword.dirty">
+    <div
+      *ngIf="
+        createAccountPassword.errors && createAccountPassword.errors.required
+      "
+      class="error-message"
+    >
+      Please provide your password.
+    </div>
+    <div
+      *ngIf="
+        createAccountPassword.errors && createAccountPassword.errors.minlength
+      "
+      class="error-message"
+    >
+      The password must contain at least 8 characters.
+    </div>
+  </div>
+  <button
+    type="submit"
+    [disabled]="createAccountForm.invalid"
+    class="btn btn-primary"
+  >
+    Create account and continue
+  </button>
+</form>
+<div *ngIf="errorExists() === true" class="system-error-message">
+  <span *ngIf="errorCode === 400">Account already exists.</span>
+  <span *ngIf="errorCode === 0"
+    >System error: please call our support line at 1-555-555-5555</span
+  >
+</div>
+<ngx-spinner
+  name="create-account-spinner"
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="cog"
+>
+  <p class="create-account-spinner">Creating your account...</p>
+</ngx-spinner>

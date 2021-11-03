@@ -1,0 +1,38 @@
+h4 {
+  display: flex;
+  justify-content: center;
+  margin-top: 64px;
+}
+
+.cart-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 64px;
+}
+
+.cart-panel {
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.cart-item {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+}
+
+.total-cart-amount {
+  font-size: 24px;
+}
+
+.checkout-button {
+  margin-top: 40px;
+  width: 100%;
+}
+
+.empty-cart-message {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}

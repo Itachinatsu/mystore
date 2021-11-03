@@ -1,0 +1,43 @@
+<div class="product-details-error" *ngIf="backendError === true">
+  <div>
+    <h4>Error getting product details!</h4>
+  </div>
+  <div>
+    <p *ngIf="errorCode === 400">Unknown product.</p>
+    <p *ngIf="errorCode === 404">Unknown product.</p>
+    <p *ngIf="errorCode === 0">Please verify backend system connectivity.</p>
+  </div>
+</div>
+<div class="detail-container" *ngIf="backendError === false">
+  <img class="product-image" src="{{ product.url }}" />
+  <div class="detail-item">
+    <h4>{{ product.name }}</h4>
+    <p>{{ product.price | currency }}</p>
+    <p>{{ product.description }}</p>
+    <select class="select-input" [(ngModel)]="quantity">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+    </select>
+    <button class="btn btn-primary add-to-cart-button" (click)="addToCart()">
+      Add to cart
+    </button>
+    <a class="back-link" routerLink="/products/">&larr; Back to product list</a>
+  </div>
+  <ngx-spinner
+    bdColor="rgba(51,51,51,0.8)"
+    size="medium"
+    color="#fff"
+    type="ball-scale"
+    [fullScreen]="false"
+  >
+    <p class="add-product-to-cart-spinner">Added to cart.</p>
+  </ngx-spinner>
+</div>

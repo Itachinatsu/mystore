@@ -1,0 +1,27 @@
+h4 {
+  display: flex;
+  justify-content: center;
+  margin-top: 64px;
+}
+
+p {
+  display: flex;
+  justify-content: center;
+}
+
+.order-confirmation-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 64px;
+}
+
+.order-confirmation-panel {
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.back-button {
+  margin-top: 40px;
+  width: 100%;
+}

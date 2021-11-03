@@ -1,0 +1,37 @@
+.checkout-form {
+  display: grid;
+}
+
+.payment-info {
+  display: grid;
+  margin-bottom: 20px;
+}
+
+.error-message {
+  color: red;
+  font-size: smaller;
+  font-weight: bolder;
+  margin-bottom: 20px;
+  margin-top: -10px;
+}
+
+.payment-details-info {
+  font-size: smaller;
+}
+
+.place-order-button {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.system-error-message {
+  color: red;
+  font-size: smaller;
+  font-weight: bolder;
+  margin-top: 5px;
+}
+
+.place-order-spinner {
+  font-size: 32px;
+  color: white;
+}

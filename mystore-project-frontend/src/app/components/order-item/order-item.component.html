@@ -1,0 +1,21 @@
+<div class="order-item-container">
+  <div class="order-item-details">
+    <p>
+      Order #:&nbsp;&nbsp;<b>{{ order.id }}</b>
+    </p>
+    <p>
+      Total Amount:&nbsp;&nbsp;<b>{{ order.totalAmount | currency }}</b>
+    </p>
+    <p>
+      Status:&nbsp;&nbsp;<span
+        class="{{
+          order.status == 0 ? 'order-status-active' : 'order-status-completed'
+        }}"
+        ><b>{{ order.status == 0 ? "ACTIVE" : "COMPLETED" }}</b></span
+      >
+    </p>
+  </div>
+  <div class="order-item-link">
+    <a routerLink="/orders/details/{{ order.id }}">View order details</a>
+  </div>
+</div>

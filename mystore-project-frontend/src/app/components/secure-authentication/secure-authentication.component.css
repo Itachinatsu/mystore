@@ -1,0 +1,34 @@
+p {
+  display: flex;
+  justify-content: center;
+}
+
+.secure-authentication-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.secure-authentication-panel {
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.authentication-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.signin-group-button {
+  padding-right: 100px;
+}
+
+.create-account-button {
+  padding-right: 100px;
+}
+
+label {
+  padding-left: 5px;
+}

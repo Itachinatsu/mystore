@@ -1,0 +1,54 @@
+<div class="order-details-error" *ngIf="backendError === true">
+  <div>
+    <h4>Error getting order details!</h4>
+  </div>
+  <div>
+    <p *ngIf="errorCode === 400">Unknown order.</p>
+    <p *ngIf="errorCode === 401">Invalid order.</p>
+    <p *ngIf="errorCode === 0">Please verify backend system connectivity.</p>
+  </div>
+</div>
+<div class="order-details" *ngIf="backendError === false">
+  <div>
+    <h4>Order Details</h4>
+  </div>
+  <div class="order-details-container">
+    <div class="order-item-details">
+      <p>
+        Order number:&nbsp;&nbsp;<b>{{ orderId }}</b>
+      </p>
+      <p>
+        Order total:&nbsp;&nbsp;<b>{{ order.totalAmount | currency }}</b>
+      </p>
+      <p>
+        Status:&nbsp;&nbsp;<span
+          class="{{
+            order.status == 0 ? 'order-status-active' : 'order-status-completed'
+          }}"
+          ><b>{{ order.status == 0 ? "ACTIVE" : "COMPLETED" }}</b></span
+        >
+      </p>
+    </div>
+    <div class="order-product-details">
+      <div class="product-listing">
+        <div *ngFor="let cartItem of cartItems" class="product-item">
+          <div class="product-image-container">
+            <img class="product-image" src="{{ cartItem.product.url }}" />
+          </div>
+          <div class="product-detail-item">
+            <h5>{{ cartItem.product.name }}</h5>
+            <p>
+              Price: <b>{{ cartItem.product.price | currency }}</b>
+            </p>
+            <p>
+              Quantity: <b>{{ cartItem.quantity }}</b>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="order-details-link">
+        <a routerLink="/orders">&larr; Back to order history</a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<h4>Secure Checkout</h4>
+<div class="payment-details-container" *ngIf="isUserLoggedIn === true">
+  <div class="payment-checkout-container">
+    <p>
+      Hi&nbsp;<b>{{ user.firstName }}</b
+      >! You're one step away!
+    </p>
+  </div>
+  <div>
+    <p>Please provide your payment details below.</p>
+  </div>
+  <div class="payment-checkout-container">
+    <div class="payment-checkout-panel">
+      <app-checkout-form></app-checkout-form>
+    </div>
+  </div>
+</div>
+<div class="secure-authentication-container" *ngIf="isUserLoggedIn === false">
+  <app-secure-authentication
+    (userUpdated)="userUpdated()"
+  ></app-secure-authentication>
+</div>

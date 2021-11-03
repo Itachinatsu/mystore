@@ -1,0 +1,102 @@
+<h5>Sign in to your account</h5>
+<form class="signin-form" #signinForm="ngForm" (ngSubmit)="submitForm()">
+  <div class="signin-info">
+    <label>First name:</label>
+    <input
+      type="text"
+      name="firstName"
+      placeholder="Enter your first name (minimum 3 characters)"
+      [(ngModel)]="firstName"
+      required
+      minlength="3"
+      #signinFirstName="ngModel"
+    />
+  </div>
+  <div *ngIf="signinFirstName.invalid && signinFirstName.dirty">
+    <div
+      *ngIf="signinFirstName.errors && signinFirstName.errors.required"
+      class="error-message"
+    >
+      Please provide your first name.
+    </div>
+    <div
+      *ngIf="signinFirstName.errors && signinFirstName.errors.minlength"
+      class="error-message"
+    >
+      The first name must contain at least 3 characters.
+    </div>
+  </div>
+  <div class="signin-info">
+    <label>Last name:</label>
+    <input
+      type="text"
+      name="lastName"
+      placeholder="Enter your last name (minimum 3 characters)"
+      [(ngModel)]="lastName"
+      required
+      minlength="3"
+      #signinLastName="ngModel"
+    />
+  </div>
+  <div *ngIf="signinLastName.invalid && signinLastName.dirty">
+    <div
+      *ngIf="signinLastName.errors && signinLastName.errors.required"
+      class="error-message"
+    >
+      Please provide your last name.
+    </div>
+    <div
+      *ngIf="signinLastName.errors && signinLastName.errors.minlength"
+      class="error-message"
+    >
+      The last name must contain at least 3 characters.
+    </div>
+  </div>
+  <div class="signin-info">
+    <label>Password:</label>
+    <input
+      [type]="hidePassword ? 'password' : 'text'"
+      name="password"
+      placeholder="Enter your password (8-16 characters)"
+      [(ngModel)]="password"
+      required
+      minlength="8"
+      maxlength="16"
+      #signinPassword="ngModel"
+    /><span class="togglePassword" (click)="togglePassword()">{{
+      hidePassword ? "Show" : "Hide"
+    }}</span>
+  </div>
+  <div *ngIf="signinPassword.invalid && signinPassword.dirty">
+    <div
+      *ngIf="signinPassword.errors && signinPassword.errors.required"
+      class="error-message"
+    >
+      Please provide your password.
+    </div>
+    <div
+      *ngIf="signinPassword.errors && signinPassword.errors.minlength"
+      class="error-message"
+    >
+      The password must contain at least 8 characters.
+    </div>
+  </div>
+  <button type="submit" [disabled]="signinForm.invalid" class="btn btn-primary">
+    Sign in and continue
+  </button>
+</form>
+<div *ngIf="errorExists() === true" class="system-error-message">
+  <span *ngIf="errorCode === 401">Invalid credentials. Please try again.</span>
+  <span *ngIf="errorCode === 0"
+    >System error: please call our support line at 1-555-555-5555</span
+  >
+</div>
+<ngx-spinner
+  name="signin-spinner"
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="cog"
+>
+  <p class="signin-spinner">Signing in...</p>
+</ngx-spinner>

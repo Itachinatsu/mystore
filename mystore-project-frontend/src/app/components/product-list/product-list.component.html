@@ -1,0 +1,15 @@
+<div class="product-index-error" *ngIf="backendError === true">
+  <div>
+    <h4>Error getting product list!</h4>
+  </div>
+  <div>
+    <p>Please verify backend system connectivity.</p>
+  </div>
+</div>
+<div class="product-index" *ngIf="backendError === false">
+  <app-product-item
+    *ngFor="let product of products"
+    [product]="product"
+    class="product-item"
+  ></app-product-item>
+</div>
