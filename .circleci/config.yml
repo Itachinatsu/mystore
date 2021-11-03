@@ -31,14 +31,8 @@ jobs:
           name: Back-End Build
           command: |
             npm run backend:build
-  eb-init:
-    docker:
-      - image: 'cimg/base:stable'
-    steps:
-      - checkout
       - eb/setup
 workflows:
   mystore-workflow:
     jobs:
       - build
-      - eb-init
