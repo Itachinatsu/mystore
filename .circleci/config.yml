@@ -3,6 +3,7 @@ orbs:
   # orbs contain basic recipes and reproducible actions (install node, aws, etc.)
   node: circleci/node@4.7.0
   aws-cli: circleci/aws-cli@2.0.3
+  aws-elastic-beanstalk: circleci/aws-elastic-beanstalk@2.0.1
   # different jobs are called later in the workflows sections
 jobs:
   build:
@@ -30,3 +31,17 @@ jobs:
           name: Back-End Build
           command: |
             npm run backend:build
+  eb-init:
+    docker:
+      - image: 'cimg/base:stable'
+    steps:
+      - checkout
+      - eb/setup
+      - run:
+          command: |
+            eb status
+          name: You may now use the EB CLI within this job
+workflows:
+  elastic-beanstalk-workflow:
+    jobs:
+      - eb-init
