@@ -15,7 +15,7 @@ app.use(bodyParser.json())
 app.use(cors())
 
 app.get('/', (_req: Request, res: Response): void => {
-  res.send('Hello World!  This is the Storefront Backend web application!')
+  res.send('Hello World!  This is the MyStore Backend API!')
 })
 
 // define the routes for the app via the handlers
@@ -25,6 +25,8 @@ order_routes(app)
 
 app.listen(3000, (): void => {
   log.info(`started app on: ${address}`)
+  log.info(`POSTGRES_HOST: `+process.env.POSTGRES_HOST)
+  log.info(`ENV: `+process.env.ENV)
 })
 
 export default app
