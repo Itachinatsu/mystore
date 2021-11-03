@@ -39,7 +39,7 @@ jobs:
       - eb/setup
       - run:
           command: |
-            eb status
+            eb init
           name: You may now use the EB CLI within this job
 workflows:
   elastic-beanstalk-workflow:
