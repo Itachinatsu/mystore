@@ -38,6 +38,7 @@ jobs:
       - checkout
       - eb/setup
 workflows:
-  elastic-beanstalk-workflow:
+  mystore-workflow:
     jobs:
+      - build
       - eb-init
