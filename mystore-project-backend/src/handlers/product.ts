@@ -9,6 +9,7 @@ const store = new ProductStore()
 
 // the handler function to create a product
 const create = async (req: Request, res: Response): Promise<void> => {
+  log.info('product:create')
   try {
     const productName = req.body.name as string
     const productCategory = req.body.category as string
@@ -24,6 +25,7 @@ const create = async (req: Request, res: Response): Promise<void> => {
         price: productPrice
       }
       const product = await store.create(newProduct)
+      log.debug(JSON.stringify(product))
       res.json(product)
     } else {
       res.status(400).send()
@@ -36,8 +38,10 @@ const create = async (req: Request, res: Response): Promise<void> => {
 
 // the handler function to get all products
 const index = async (req: Request, res: Response): Promise<void> => {
+  log.info('product:index')
   try {
     const products = await store.index(req.query.category as string)
+    log.debug(JSON.stringify(products))
     res.json(products)
   } catch (error) {
     log.trace(error)
@@ -47,6 +51,7 @@ const index = async (req: Request, res: Response): Promise<void> => {
 
 // the handler function to get a product
 const show = async (req: Request, res: Response): Promise<void> => {
+  log.info('product:show')
   try {
     const productId = req.params.id as string
     const pId = parseInt(productId)
@@ -55,6 +60,7 @@ const show = async (req: Request, res: Response): Promise<void> => {
     }
     const product = await store.show(pId)
     if (product) {
+      log.debug(JSON.stringify(product))
       res.json(product)
     } else {
       res.status(404).send()

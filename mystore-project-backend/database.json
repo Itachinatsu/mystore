@@ -1,16 +1,16 @@
 {
     "dev": {
       "driver": "pg",
-      "host": "127.0.0.1",
-      "database": "full_stack_dev",
-      "user": "full_stack_user",
-      "password": "password123"
+      "host": {"ENV": "AWS_RDS_HOSTNAME"},
+      "database": {"ENV": "AWS_RDS_DB_NAME"},
+      "user": {"ENV": "AWS_RDS_USERNAME"},
+      "password": {"ENV": "AWS_RDS_PASSWORD"}
     },
     "test": {
       "driver": "pg",
-      "host": "127.0.0.1",
-      "database": "full_stack_test",
-      "user": "test_user",
-      "password": "password123"
+      "host": {"ENV": "AWS_RDS_HOSTNAME"},
+      "database": {"ENV": "AWS_RDS_TEST_DB"},
+      "user": {"ENV": "AWS_RDS_TEST_USER"},
+      "password": {"ENV": "AWS_RDS_TEST_PASSWORD"}
     }
 }

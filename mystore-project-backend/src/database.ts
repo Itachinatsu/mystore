@@ -1,23 +1,19 @@
 import dotenv from 'dotenv'
-import { Pool } from 'pg'
+import pg from 'pg';
+import * as c from './config'
 
 dotenv.config() // initializes the environment variables
 
-const {
-  POSTGRES_HOST,
-  POSTGRES_DB,
-  POSTGRES_USER,
-  POSTGRES_PASSWORD,
-  POSTGRES_TEST_DB,
-  POSTGRES_TEST_USER,
-  ENV
-} = process.env
+const { Pool } = pg;
 
-const client: Pool = new Pool({
-  host: POSTGRES_HOST,
-  database: ENV === 'dev' ? POSTGRES_DB : POSTGRES_TEST_DB,
-  user: ENV === 'dev' ? POSTGRES_USER : POSTGRES_TEST_USER,
-  password: POSTGRES_PASSWORD
-})
+const config = {
+    host: c.config.host,
+    port: c.config.port,
+    database: c.config.database,
+    user: c.config.username,
+    password: c.config.password
+}
 
-export default client
+const Client = new Pool(config);
+
+export default Client

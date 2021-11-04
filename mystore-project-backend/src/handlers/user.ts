@@ -3,6 +3,7 @@ import { User, UserStore } from '../models/user'
 import jwt, { Secret } from 'jsonwebtoken'
 import verifyAuthToken from '../utils/authentication'
 import { Logger } from 'tslog'
+import * as c from '../config'
 
 const store = new UserStore()
 const log: Logger = new Logger()
@@ -18,13 +19,14 @@ const createToken = (theUser: User): string => {
         lastname: theUser.lastname
       }
     },
-    process.env.TOKEN_SECRET as Secret
+    c.config.token_secret as Secret
   )
 }
 
 // the handler function to create a user;
 // a JWT for the user is returned upon successful creation/sign up/registration
 const create = async (req: Request, res: Response): Promise<void> => {
+  log.info('user:create')
   try {
     const userFirstName = req.body.firstname as string
     const userLastName = req.body.lastname as string
@@ -41,6 +43,7 @@ const create = async (req: Request, res: Response): Promise<void> => {
         res.status(400).send()
       } else {
         const theUser = await store.create(newUser)
+        log.debug(JSON.stringify(theUser))
         res.json({ user: theUser, token: createToken(theUser) })
       }
     } else {
@@ -54,8 +57,10 @@ const create = async (req: Request, res: Response): Promise<void> => {
 
 // the handler function to get all users
 const index = async (_req: Request, res: Response): Promise<void> => {
+  log.info('user:index')
   try {
     const users = await store.index()
+    log.debug(JSON.stringify(users))
     res.json(users)
   } catch (error) {
     log.trace(error)
@@ -65,6 +70,7 @@ const index = async (_req: Request, res: Response): Promise<void> => {
 
 // the handler function to get a user
 const show = async (req: Request, res: Response): Promise<void> => {
+  log.info('user:show')
   try {
     const userId = req.params.id as string
     const uId = parseInt(userId)
@@ -73,6 +79,7 @@ const show = async (req: Request, res: Response): Promise<void> => {
     }
     const user = await store.show(uId)
     if (user) {
+      log.debug(JSON.stringify(user))
       res.json(user)
     } else {
       res.status(404).send()
@@ -86,6 +93,7 @@ const show = async (req: Request, res: Response): Promise<void> => {
 // the handler function to authenticate/login a user;
 // a JWT for the user is returned upon successful authentication/login
 const authenticate = async (req: Request, res: Response): Promise<void> => {
+  log.info('user:authenticate')
   const user: User = {
     firstname: req.body.firstname,
     lastname: req.body.lastname,
@@ -94,6 +102,7 @@ const authenticate = async (req: Request, res: Response): Promise<void> => {
   try {
     const theUser = await store.authenticate(user)
     if (theUser) {
+      log.debug(JSON.stringify(theUser))
       res.json({ user: theUser, token: createToken(theUser) })
     } else {
       res.status(401).send()

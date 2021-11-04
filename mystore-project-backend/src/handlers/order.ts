@@ -4,6 +4,7 @@ import { UserStore } from '../models/user'
 import { ProductStore } from '../models/product'
 import jwt, { JwtPayload, Secret } from 'jsonwebtoken'
 import { Logger } from 'tslog'
+import * as c from '../config'
 
 const orderStore = new OrderStore()
 const userStore = new UserStore()
@@ -15,7 +16,7 @@ function verifyAuthTokenForUser(req: Request, userId: string) {
   const token = authorizationHeader.split(' ')[1]
   const decoded = jwt.verify(
     token,
-    process.env.TOKEN_SECRET as Secret
+    c.config.token_secret as Secret
   ) as JwtPayload
   if (decoded.user.id !== parseInt(userId)) {
     throw new Error('User id does not match!')
@@ -24,6 +25,7 @@ function verifyAuthTokenForUser(req: Request, userId: string) {
 
 // the handler function to get a user's current order
 const currentOrder = async (req: Request, res: Response): Promise<void> => {
+  log.info('order:currentOrder')
   const userId = req.params.id as string
 
   // ensure that the order is retrieved for the user identified in the JWT
@@ -43,6 +45,7 @@ const currentOrder = async (req: Request, res: Response): Promise<void> => {
     const user = await userStore.show(uId)
     if (user) {
       const order = await orderStore.currentOrder(uId)
+      log.debug(JSON.stringify(order))
       res.json(order)
     } else {
       res.status(400).send()
@@ -58,6 +61,7 @@ const addProductToOrder = async (
   req: Request,
   res: Response
 ): Promise<void> => {
+  log.info('order:addProductToOrder')
   const userId = req.params.id as string
   const productId = req.body.product_id as string
   const quantity = req.body.quantity as string
@@ -84,6 +88,7 @@ const addProductToOrder = async (
       const product = await productStore.show(pId)
       if (product) {
         const order = await orderStore.addProductToOrder(uId, pId, q)
+        log.debug(JSON.stringify(order))
         res.json({ order: order })
       } else {
         res.status(400).send()
@@ -102,6 +107,7 @@ const createNewOrder = async (
   req: Request,
   res: Response
 ): Promise<void> => {
+  log.info('order:createNewOrder')
   const userId = req.params.id as string
 
   // ensure that the order is retrieved for the user identified in the JWT
@@ -144,6 +150,7 @@ const createNewOrder = async (
             }
           } //for-loop
 
+          log.debug(JSON.stringify(newOrder))
           res.json({ order: newOrder })
         } else {
           res.status(400).send()
@@ -163,6 +170,7 @@ const getOrderForUser = async (
   req: Request,
   res: Response
 ): Promise<void> => {
+  log.info('order:getOrderForUser')
   const userId = req.params.userId as string
   // ensure that the order is retrieved for the user identified in the JWT
   try {
@@ -188,6 +196,7 @@ const getOrderForUser = async (
           // get the specified order for the user
           const order = await orderStore.getOrderForUser(oId, uId)
           if (order) {
+            log.debug(JSON.stringify(order))
             res.json({ order: order })
           } else {
             res.status(400).send()
@@ -208,6 +217,7 @@ const getOrdersForUser = async (
   req: Request,
   res: Response
 ): Promise<void> => {
+  log.info('order:getOrdersForUser')
   const userId = req.params.id as string
 
   // ensure that the orders are retrieved for the user identified in the JWT
@@ -233,6 +243,7 @@ const getOrdersForUser = async (
           const anOrder = orders[index];
           ordersRes.push({ order: anOrder })
         }
+        log.debug(JSON.stringify(ordersRes))
         res.json(ordersRes)
       } else {
         res.status(400).send()

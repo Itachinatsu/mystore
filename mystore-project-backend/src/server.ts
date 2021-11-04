@@ -2,14 +2,14 @@ import express, { Request, Response } from 'express'
 import bodyParser from 'body-parser'
 import { Logger } from 'tslog'
 import cors from 'cors'
+import * as c from './config'
 
 import product_routes from './handlers/product'
 import user_routes from './handlers/user'
 import order_routes from './handlers/order'
 
 const app: express.Application = express()
-const address = '0.0.0.0:3000'
-const log: Logger = new Logger({ name: 'storeFront', type: 'json' })
+const log: Logger = new Logger({ name: 'myStore', type: 'pretty' })
 
 app.use(bodyParser.json())
 app.use(cors())
@@ -24,9 +24,10 @@ user_routes(app)
 order_routes(app)
 
 app.listen(3000, (): void => {
-  log.info(`started app on: ${address}`)
-  log.info(`POSTGRES_HOST: `+process.env.POSTGRES_HOST)
-  log.info(`ENV: `+process.env.ENV)
+  log.info(`started app`)
+  log.info(`db: `+ c.config.host)
+  log.info(`port: `+ c.config.port)
+  log.info(`env: `+ c.config.env)
 })
 
 export default app
