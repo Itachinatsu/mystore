@@ -14,25 +14,36 @@ jobs:
       - node/install
       - checkout
       - aws-cli/setup
-      # install dependencies in both apps
+      - eb/setup
+      # install dependencies for front-end app
       - run:
           name: Front-End Install
           command: |
             npm run frontend:install
+      # install dependencies for back-end app
       - run:
           name: Back-End Install
           command: |
             npm run backend:install
+      # build front-end application
       - run:
           name: Front-End Build
           command: |
             npm run frontend:build
+      # build back-end application
       - run:
           name: Back-End Build
           command: |
             npm run backend:build
-      - eb/setup
+      # run back-end tests
+      - run:
+          name: Back-End Tests
+          command: |
+            npm run backend:test
 workflows:
   mystore-workflow:
     jobs:
-      - build
+      - build:
+          filters:
+            branches:
+              only: main
