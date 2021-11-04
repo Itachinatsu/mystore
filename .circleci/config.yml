@@ -40,6 +40,8 @@ jobs:
     docker:
       - image: 'cimg/base:stable'
     steps:
+      - node/install
+      - checkout
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
       # run back-end tests
