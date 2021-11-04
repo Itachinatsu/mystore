@@ -16,12 +16,14 @@ jobs:
       - checkout
       - aws-cli/setup
       - eb/setup
-      # install dependencies for front-end app
+      - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
+      # install dependencies for front-end application
       - run:
           name: Front-End Install
           command: |
             npm run frontend:install
-      # install dependencies for back-end app
+      # install dependencies for back-end application
       - run:
           name: Back-End Install
           command: |
@@ -36,14 +38,6 @@ jobs:
           name: Back-End Build
           command: |
             npm run backend:build
-  test:
-    docker:
-      - image: 'cimg/base:stable'
-    steps:
-      - node/install
-      - checkout
-      - browser-tools/install-chrome
-      - browser-tools/install-chromedriver
       # run back-end tests
       - run:
           name: Back-End Tests
@@ -63,6 +57,3 @@ workflows:
   mystore-workflow:
     jobs:
       - build
-      - test:
-          requires:
-            - build
