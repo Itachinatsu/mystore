@@ -17,6 +17,7 @@ jobs:
       - aws-cli/setup
       - eb/setup
       - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
       # install dependencies for front-end app
       - run:
           name: Front-End Install
@@ -46,6 +47,7 @@ jobs:
           name: Check browser installation
           command: |
             google-chrome --version
+            chromedriver --version
       # run front-end tests
       - run:
           name: Front-End Tests
