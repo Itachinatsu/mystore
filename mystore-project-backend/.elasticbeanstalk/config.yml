@@ -3,7 +3,7 @@ branch-defaults:
     environment: Mystorebackend-env-2
     group_suffix: null
 deploy:
-  artifact: dist/Archive.zip
+  artifact: dist/mystore-backend.zip
 global:
   application_name: mystorebackend
   default_ec2_keyname: null

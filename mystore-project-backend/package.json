@@ -20,7 +20,7 @@
     "watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess 'node ./dist/server.js'",
     "deploy": "chmod +x ./bin/deploy.sh && ./bin/deploy.sh",
     "clean": "rm -rf dist/ || true",
-    "build": "npm run clean && tsc && cp database.json dist/database.json && cp .npmrc dist/.npmrc && cp package.json dist/package.json && cd dist && zip -r Archive.zip . && cd ..",
+    "build": "npm run clean && tsc && cp database.json dist/database.json && cp .npmrc dist/.npmrc && cp package.json dist/package.json && cd dist && zip -r mystore-backend.zip . && cd ..",
     "test": "export ENV='test' && tsc && db-migrate --env test up && jasmine-ts && db-migrate reset --env test"
   },
   "author": "Mark de Leon",
