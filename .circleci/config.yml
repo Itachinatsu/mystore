@@ -53,6 +53,11 @@ jobs:
           name: Front-End Tests
           command: |
             npm run frontend:test
+      # Deploy back-end application artifact to Elastic Beanstalk
+      - run:
+          name: Back-End Deploy
+          command: |
+            npm run backend:deploy
 workflows:
   mystore-workflow:
     jobs:
