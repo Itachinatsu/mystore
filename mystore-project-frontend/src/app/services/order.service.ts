@@ -59,7 +59,7 @@ export class OrderService {
     }
 
     // call the backend API to place the order (persist on the backend)
-    return this.http.post<OrderRes>('http://localhost:3000/users/'+this.userService.getUser().id+'/order/new', requestBody, this.getRequestHeaders())
+    return this.http.post<OrderRes>('http://mystorebackend-env-2.eba-upfexrmm.us-east-1.elasticbeanstalk.com/users/'+this.userService.getUser().id+'/order/new', requestBody, this.getRequestHeaders())
   }
 
   setPlacedOrder(o: OrderRes) {
@@ -77,11 +77,11 @@ export class OrderService {
   }
 
   getOrders(): Observable<OrderRes[]> {
-    return this.http.get<OrderRes[]>('http://localhost:3000/users/'+this.userService.getUser().id+'/orders', this.getRequestHeaders())
+    return this.http.get<OrderRes[]>('http://mystorebackend-env-2.eba-upfexrmm.us-east-1.elasticbeanstalk.com/users/'+this.userService.getUser().id+'/orders', this.getRequestHeaders())
   }
 
   getOrder(orderId: number): Observable<OrderRes> {
-    return this.http.get<OrderRes>('http://localhost:3000/users/'+this.userService.getUser().id+'/order/'+orderId, this.getRequestHeaders())
+    return this.http.get<OrderRes>('http://mystorebackend-env-2.eba-upfexrmm.us-east-1.elasticbeanstalk.com/users/'+this.userService.getUser().id+'/order/'+orderId, this.getRequestHeaders())
   }
 
   clearPlacedOrder(): void {

@@ -7,7 +7,7 @@ orbs:
   browser-tools: circleci/browser-tools@1.2.3
   # different jobs are called later in the workflows sections
 jobs:
-  build:
+  build-test-deploy:
     docker:
       # the base image can run most needed actions with orbs
       - image: 'cimg/base:stable'
@@ -53,12 +53,17 @@ jobs:
           name: Front-End Tests
           command: |
             npm run frontend:test
-      # Deploy back-end application artifact to Elastic Beanstalk
+      # Deploy back-end application artifacts to Elastic Beanstalk
       - run:
           name: Back-End Deploy
           command: |
             npm run backend:deploy
+      # Deploy front-end application artifacts to Simple Storage Service
+      - run:
+          name: Front-End Deploy
+          command: |
+            npm run frontend:deploy
 workflows:
   mystore-workflow:
     jobs:
-      - build
+      - build-test-deploy

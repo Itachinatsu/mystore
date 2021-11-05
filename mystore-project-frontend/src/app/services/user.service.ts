@@ -32,7 +32,7 @@ export class UserService {
       password: password
     }
   
-    return this.http.post<AuthenticateUserRes>('http://localhost:3000/users/login', requestBody)
+    return this.http.post<AuthenticateUserRes>('http://mystorebackend-env-2.eba-upfexrmm.us-east-1.elasticbeanstalk.com/users/login', requestBody)
   }
   
   createAccount(firstName: string, lastName: string, password: string): Observable<AuthenticateUserRes> {
@@ -43,7 +43,7 @@ export class UserService {
       password: password
     }
   
-    return this.http.post<AuthenticateUserRes>('http://localhost:3000/users/register', requestBody)
+    return this.http.post<AuthenticateUserRes>('http://mystorebackend-env-2.eba-upfexrmm.us-east-1.elasticbeanstalk.com/users/register', requestBody)
   }
 
   getUser(): User {

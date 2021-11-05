@@ -25,11 +25,11 @@ export class ProductService {
   }
 
   getProductList(): Observable<Product[]> {
-    return this.http.get<Product[]>('http://localhost:3000/products')
+    return this.http.get<Product[]>('http://mystorebackend-env-2.eba-upfexrmm.us-east-1.elasticbeanstalk.com/products')
   }
 
   getProduct(productId: number): Observable<Product> {
-    return this.http.get<Product>('http://localhost:3000/products/'+productId+'/details')
+    return this.http.get<Product>('http://mystorebackend-env-2.eba-upfexrmm.us-east-1.elasticbeanstalk.com/products/'+productId+'/details')
   }
 
   setProducts(products: Product[]): void {
