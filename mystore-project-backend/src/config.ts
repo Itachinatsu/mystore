@@ -2,8 +2,8 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 export const config = {
-  host: process.env.AWS_RDS_HOSTNAME,
-  port: Number(process.env.AWS_RDS_PORT),
+  dbhost: process.env.AWS_RDS_HOSTNAME,
+  dbport: Number(process.env.AWS_RDS_PORT),
 
   database: process.env.ENV === 'dev' ? process.env.AWS_RDS_DB_NAME : process.env.AWS_RDS_TEST_DB,
   username: process.env.ENV === 'dev' ? `${process.env.AWS_RDS_USERNAME}` : `${process.env.AWS_RDS_TEST_USER}`,
@@ -11,6 +11,7 @@ export const config = {
 
   dialect: "postgres",
   env: process.env.ENV,
+  app_port: Number(process.env.PORT),
 
   bcrypt_password: process.env.BCRYPT_PASSWORD,
   salt_rounds: process.env.SALT_ROUNDS,

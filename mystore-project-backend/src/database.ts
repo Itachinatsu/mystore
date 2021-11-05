@@ -7,8 +7,8 @@ dotenv.config() // initializes the environment variables
 const { Pool } = pg;
 
 const config = {
-    host: c.config.host,
-    port: c.config.port,
+    host: c.config.dbhost,
+    port: c.config.dbport,
     database: c.config.database,
     user: c.config.username,
     password: c.config.password

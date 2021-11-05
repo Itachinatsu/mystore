@@ -23,10 +23,10 @@ product_routes(app)
 user_routes(app)
 order_routes(app)
 
-app.listen(3000, (): void => {
-  log.info(`started app`)
-  log.info(`db: `+ c.config.host)
-  log.info(`port: `+ c.config.port)
+app.listen(c.config.app_port, (): void => {
+  log.info(`started app on port: `+ c.config.app_port)
+  log.info(`dbhost: `+ c.config.dbhost)
+  log.info(`dbport: `+ c.config.dbport)
   log.info(`env: `+ c.config.env)
 })
 
