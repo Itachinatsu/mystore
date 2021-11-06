@@ -35,10 +35,9 @@ API:  http://mystorebackend-env-2.eba-upfexrmm.us-east-1.elasticbeanstalk.com
 
 This full stack application is deployed with a CircleCI continuous integration pipeline.
 
-![alt text](https://github.com/markdeleon01/mystore-fullstack/blob/main/screenshots/circleci-build-test-deploy.png "CircleCI")
 
 ---
 
 ## Documentation
 
-Documentation about the architecture, infrastructure description, app dependencies, and the pipeline process are found inside the docs folder.
+Documentation about the architecture, infrastructure description, app dependencies, and the pipeline process are found inside the [docs](https://github.com/markdeleon01/mystore-fullstack/tree/main/docs) folder.
