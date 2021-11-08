@@ -1,1 +1,2 @@
-ng run mystore-frontend:cypress-run
+xvfb-run npx cypress verify
+xvfb-run npx cypress run
