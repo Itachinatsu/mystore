@@ -1,4 +1,4 @@
-Xvfb :1 -screen 0 1280x800x24 &
-export DISPLAY=:1
-npx cypress verify
-npx cypress run
+sudo apt-get install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
+
+sudo xvfb-run npx cypress verify
+sudo xvfb-run npx cypress run
