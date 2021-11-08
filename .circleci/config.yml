@@ -84,6 +84,6 @@ workflows:
       - cypress/run:
           executor: cypress/base-14
           working_directory: mystore-project-frontend
-          start: npm run frontend:start-e2e
+          start: npm run start-e2e
           wait-on: 'http://localhost:4200'
           store_artifacts: false

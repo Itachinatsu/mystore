@@ -8,6 +8,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "chmod +x ./bin/test.sh && ./bin/test.sh",
+    "start-e2e": "npm install && npm run build && npm run start",
     "test-e2e": "chmod +x ./bin/test-e2e.sh && ./bin/test-e2e.sh",
     "deploy": "chmod +x ./bin/deploy.sh && ./bin/deploy.sh",
     "cypress:open": "cypress open",

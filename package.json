@@ -9,7 +9,6 @@
         "backend:deploy": "cd mystore-project-backend && npm run deploy",
         "frontend:start": "cd mystore-project-frontend && npm run start",
         "frontend:deploy": "cd mystore-project-frontend && npm run deploy",
-        "frontend:start-e2e": "npm install && npm run build && npm run start",
         "frontend:test-e2e": "cd mystore-project-frontend && npm run test-e2e"
     }
 }
