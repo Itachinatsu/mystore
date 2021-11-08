@@ -82,7 +82,7 @@ workflows:
     jobs:
       #      - build-test-deploy
       - cypress/run:
-          executor: cypress/base-14
+          executor: cypress/base-12
           working_directory: mystore-project-frontend
           start: npm run start-e2e
           wait-on: 'http://localhost:4200'
