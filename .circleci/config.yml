@@ -9,7 +9,9 @@ orbs:
   # different jobs are called later in the workflows sections
 jobs:
   run-e2e-tests:
-    - cypress/run
+    steps:
+      - cypress/install
+      - cypress/run
 
   build-test-deploy:
     docker:
