@@ -9,32 +9,8 @@ orbs:
   # different jobs are called later in the workflows sections
 jobs:
   run-e2e-tests:
-    docker:
-      # the base image can run most needed actions with orbs
-      - image: 'cimg/base:stable'
-        environment:
-          ## this enables colors in the output
-          TERM: xterm
-    steps:
-      - node/install
-      - checkout
-      # first get the source code and install npm dependencies
-      - run:
-          name: Install dependencies
-          command: |
-            npm run frontend:test-e2e
-      - cypress/install
-      # install dependencies for front-end application
-      - run:
-          name: Front-End Install
-          command: |
-            npm run frontend:install
-      # build front-end application
-      - run:
-          name: Front-End Build
-          command: |
-            npm run frontend:build
-      - run: $(npm bin)/cypress run
+    - cypress/run
+
   build-test-deploy:
     docker:
       # the base image can run most needed actions with orbs
