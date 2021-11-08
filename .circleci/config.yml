@@ -87,4 +87,5 @@ workflows:
     jobs:
       - build-test-deploy
       - run-e2e-tests:
-          requires: build-test-deploy
+          requires:
+            - build-test-deploy
