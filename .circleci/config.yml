@@ -64,13 +64,12 @@ jobs:
           name: Front-End Deploy
           command: |
             npm run frontend:deploy
-      # run front-end application end-to-end tests
-      - cypress/run:
-          start: npm start
+      # run end-to-end tests
+      - run:
+          name: End-to-End Tests
+          command: |
+            npm run frontend:test-e2e
 workflows:
   mystore-workflow:
     jobs:
       - build-test-deploy
-      # run front-end application end-to-end tests
-      - cypress/run:
-          start: npm start
