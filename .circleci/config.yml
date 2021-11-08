@@ -71,11 +71,16 @@ workflows:
   mystore-e2e-test-workflow:
     jobs:
       - cypress/install:
-          post-checkout: npm install
-          build: npm run build
+          post-checkout:
+            steps:
+              - run:
+                  name: Front-End Install
+                  command: |
+                    npm run frontend:install
+          build: npm run frontend:build
       - cypress/run:
           requires:
             - cypress/install
           executor: cypress/base-14
-          start: npm start
+          start: npm run frontend:start
           wait-on: 'http://localhost:4200'
