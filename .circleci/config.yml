@@ -71,6 +71,7 @@ workflows:
   mystore-e2e-test-workflow:
     jobs:
       - cypress/install:
+          post-checkout: npm install
           build: npm run build
       - cypress/run:
           requires:
