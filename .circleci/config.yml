@@ -8,6 +8,26 @@ orbs:
   cypress: cypress-io/cypress@1.29.0
   # different jobs are called later in the workflows sections
 jobs:
+  build-e2e:
+    docker:
+      # the base image can run most needed actions with orbs
+      - image: 'cimg/base:stable'
+    steps:
+      - node/install
+      - checkout
+      - run:
+          name: Front-End Install
+          command: |
+            npm run frontend:install
+      - run:
+          name: Front-End Build
+          command: |
+            npm run frontend:build
+      # run end-to-end tests
+      - run:
+          name: End-to-End Tests
+          command: |
+            npm run frontend:test-e2e
   build-test-deploy:
     docker:
       # the base image can run most needed actions with orbs
@@ -64,12 +84,10 @@ jobs:
           name: Front-End Deploy
           command: |
             npm run frontend:deploy
-      # run end-to-end tests
-      - run:
-          name: End-to-End Tests
-          command: |
-            npm run frontend:test-e2e
 workflows:
   mystore-workflow:
     jobs:
       - build-test-deploy
+      - build-e2e:
+          requires:
+            - build-test-deploy
