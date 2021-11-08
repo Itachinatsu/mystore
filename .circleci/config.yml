@@ -68,7 +68,10 @@ workflows:
   mystore-build-test-deploy-workflow:
     jobs:
       #      - build-test-deploy
+      - cypress/install
       - cypress/run:
+          requires:
+            - cypress/install
           start: npm run frontend:start
           wait-on: 'http://localhost:4200'
           store_artifacts: true
