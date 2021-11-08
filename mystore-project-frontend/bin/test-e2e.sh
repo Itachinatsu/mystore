@@ -1,0 +1,1 @@
+ng run mystore-frontend:cypress-run
