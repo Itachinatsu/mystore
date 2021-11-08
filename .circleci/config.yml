@@ -91,6 +91,4 @@ workflows:
   mystore-build-test-deploy-workflow:
     jobs:
       #      - build-test-deploy
-      - run-e2e-tests:
-          requires:
-            - build-test-deploy
+      - run-e2e-tests
