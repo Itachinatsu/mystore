@@ -80,9 +80,11 @@ jobs:
 workflows:
   mystore-build-test-deploy-workflow:
     jobs:
-      #      - build-test-deploy
+      - build-test-deploy
       - cypress/run:
-          executor: cypress/base-12
+          requires:
+            - build-test-deploy
+          executor: cypress/base-12-14-0
           working_directory: mystore-project-frontend
           start: npm run start-e2e
           wait-on: 'http://localhost:4200'
