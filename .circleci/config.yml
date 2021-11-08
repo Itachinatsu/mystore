@@ -71,15 +71,7 @@ workflows:
   mystore-e2e-test-workflow:
     jobs:
       - cypress/install:
-          steps:
-            - run:
-                name: Front-End Install
-                command: |
-                  npm run frontend:install
-            - run:
-                name: Front-End Build
-                command: |
-                  npm run frontend:build
+          build: npm run frontend:install && npm run frontend:build
       - cypress/run:
           requires:
             - cypress/install
