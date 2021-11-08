@@ -5,7 +5,6 @@ orbs:
   aws-cli: circleci/aws-cli@2.0.3
   eb: circleci/aws-elastic-beanstalk@2.0.1
   browser-tools: circleci/browser-tools@1.2.3
-  cypress: cypress-io/cypress@1.29.0
   # different jobs are called later in the workflows sections
 jobs:
   build-test-deploy:
@@ -64,17 +63,12 @@ jobs:
           name: Front-End Deploy
           command: |
             npm run frontend:deploy
+      # run end-to-end tests
+      - run:
+          name: End-to-End Tests
+          command: |
+            npm run frontend:test-e2e
 workflows:
   mystore-build-test-deploy-workflow:
     jobs:
       - build-test-deploy
-  mystore-e2e-test-workflow:
-    jobs:
-      - cypress/install:
-          build: npm run frontend:install && npm run frontend:build
-      - cypress/run:
-          requires:
-            - cypress/install
-          executor: cypress/base-14
-          start: npm run frontend:start
-          wait-on: 'http://localhost:4200'
