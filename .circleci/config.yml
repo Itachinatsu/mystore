@@ -5,7 +5,7 @@ orbs:
   aws-cli: circleci/aws-cli@2.0.3
   eb: circleci/aws-elastic-beanstalk@2.0.1
   browser-tools: circleci/browser-tools@1.2.3
-  cypress: cypress-io/cypress@1
+  cypress: cypress-io/cypress@1.29.0
   # different jobs are called later in the workflows sections
 jobs:
   build-test-deploy:
@@ -19,6 +19,7 @@ jobs:
       - eb/setup
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
+      # use Node v14.18.1
       - run:
           name: Swap node versions
           command: |
@@ -80,7 +81,9 @@ jobs:
 workflows:
   mystore-build-test-deploy-workflow:
     jobs:
+      # build, test, deploy
       - build-test-deploy
+      # run Cypress end-to-end tests
       - cypress/run:
           requires:
             - build-test-deploy

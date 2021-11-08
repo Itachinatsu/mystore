@@ -7,7 +7,6 @@
         "backend:test": "cd mystore-project-backend && npm run test",
         "frontend:test": "cd mystore-project-frontend && npm run test",
         "backend:deploy": "cd mystore-project-backend && npm run deploy",
-        "frontend:start": "cd mystore-project-frontend && npm run start",
         "frontend:deploy": "cd mystore-project-frontend && npm run deploy"
     }
 }
