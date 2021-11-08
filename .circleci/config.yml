@@ -16,10 +16,20 @@ jobs:
           ## this enables colors in the output
           TERM: xterm
     steps:
+      - node/install
       - checkout
+      # first get the source code and install npm dependencies
+      - cypress/install
+      # install dependencies for front-end application
       - run:
-          name: Install Dependencies
-          command: npm ci
+          name: Front-End Install
+          command: |
+            npm run frontend:install
+      # build front-end application
+      - run:
+          name: Front-End Build
+          command: |
+            npm run frontend:build
       - run: $(npm bin)/cypress run
   build-test-deploy:
     docker:
@@ -80,7 +90,7 @@ jobs:
 workflows:
   mystore-build-test-deploy-workflow:
     jobs:
-      - build-test-deploy
+      #      - build-test-deploy
       - run-e2e-tests:
           requires:
             - build-test-deploy
