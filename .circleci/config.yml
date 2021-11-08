@@ -41,7 +41,7 @@ jobs:
             npm run backend:build
       # run back-end tests
       - run:
-          name: Back-End Tests
+          name: Back-End Unit and Integration Tests
           command: |
             npm run backend:test
       - run:
@@ -49,9 +49,9 @@ jobs:
           command: |
             google-chrome --version
             chromedriver --version
-      # run front-end tests
+      # run front-end unit tests
       - run:
-          name: Front-End Tests
+          name: Front-End Unit Tests
           command: |
             npm run frontend:test
       # deploy back-end application artifacts to Elastic Beanstalk
