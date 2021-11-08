@@ -8,16 +8,6 @@ orbs:
   cypress: cypress-io/cypress@1
   # different jobs are called later in the workflows sections
 jobs:
-  run-e2e-tests:
-    docker:
-      # the base image can run most needed actions with orbs
-      - image: 'cimg/base:stable'
-    steps:
-      - node/install
-      - checkout
-      - cypress/install
-      - cypress/run
-
   build-test-deploy:
     docker:
       # the base image can run most needed actions with orbs
@@ -78,4 +68,7 @@ workflows:
   mystore-build-test-deploy-workflow:
     jobs:
       #      - build-test-deploy
-      - run-e2e-tests
+      - cypress/run:
+          start: npm run frontend:start
+          wait-on: 'http://localhost:4200'
+          store_artifacts: true
