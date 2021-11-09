@@ -1,4 +1,4 @@
-describe('MyStore app End-to-End Tests', () => {
+describe('MyStore App End-to-End Tests', () => {
   it('Visits the initial project page', () => {
     cy.visit('/')
     cy.contains('MyStore')
