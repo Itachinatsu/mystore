@@ -1,13 +1,31 @@
 <div class="header">
   <h1>MyStore</h1>
-  <a routerLink="/products">Product List</a><span> | </span>
-  <a routerLink="/cart">Cart</a>&nbsp;<span>[{{ totalCartQuantity }}]</span>
+  <a routerLink="/products" data-testid="productListLink">Product List</a
+  ><span> | </span>
+  <a routerLink="/cart" data-testid="cartLink">Cart</a>&nbsp;<span
+    data-testid="cartQuantity"
+    >[{{ totalCartQuantity }}]</span
+  >
   <span *ngIf="userIsLoggedIn === false"> | </span>
-  <a routerLink="/authenticate" *ngIf="userIsLoggedIn === false">Login</a>
+  <a
+    routerLink="/authenticate"
+    *ngIf="userIsLoggedIn === false"
+    data-testid="loginLink"
+    >Login</a
+  >
   <span *ngIf="userIsLoggedIn === true"> | </span>
-  <a routerLink="/orders" *ngIf="userIsLoggedIn === true">View Orders</a>
+  <a
+    routerLink="/orders"
+    *ngIf="userIsLoggedIn === true"
+    data-testid="viewOrdersLink"
+    >View Orders</a
+  >
   <span *ngIf="userIsLoggedIn === true"> | </span>
-  <a routerLink="/" *ngIf="userIsLoggedIn === true" (click)="logout()"
+  <a
+    routerLink="/"
+    *ngIf="userIsLoggedIn === true"
+    (click)="logout()"
+    data-testid="logoutLink"
     >Logout</a
   >
 </div>

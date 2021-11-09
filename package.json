@@ -6,6 +6,7 @@
         "backend:build": "cd mystore-project-backend && npm run build",
         "backend:test": "cd mystore-project-backend && npm run test",
         "frontend:test": "cd mystore-project-frontend && npm run test",
+        "frontend:test-e2e": "cd mystore-project-frontend && npm run test-e2e",
         "backend:deploy": "cd mystore-project-backend && npm run deploy",
         "frontend:deploy": "cd mystore-project-frontend && npm run deploy"
     }

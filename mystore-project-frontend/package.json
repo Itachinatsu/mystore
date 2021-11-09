@@ -10,6 +10,7 @@
     "test": "chmod +x ./bin/test.sh && ./bin/test.sh",
     "deploy": "chmod +x ./bin/deploy.sh && ./bin/deploy.sh",
     "start-e2e": "npm install && npm run build && npm run start",
+    "test-e2e": "ng run mystore-frontend:cypress-open",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run"
   },
