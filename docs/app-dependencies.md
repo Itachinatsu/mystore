@@ -63,7 +63,7 @@
 ```
 {
   "name": "mystore-frontend",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "MyStore Front-end Web App",
   "dependencies": {
     "@angular/animations": "~12.2.0",
@@ -87,6 +87,7 @@
     "@angular-devkit/build-angular": "~12.2.7",
     "@angular/cli": "~12.2.7",
     "@angular/compiler-cli": "~12.2.0",
+    "@cypress/schematic": "^1.5.3",
     "@types/jasmine": "~3.8.0",
     "@types/node": "^12.11.1",
     "jasmine-core": "~3.8.0",
@@ -95,7 +96,8 @@
     "karma-coverage": "~2.0.3",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
-    "typescript": "~4.3.5"
+    "typescript": "~4.3.5",
+    "cypress": "latest"
   }
 }
 
