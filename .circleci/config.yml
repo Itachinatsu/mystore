@@ -5,6 +5,7 @@ orbs:
   aws-cli: circleci/aws-cli@2.0.3
   eb: circleci/aws-elastic-beanstalk@2.0.1
   browser-tools: circleci/browser-tools@1.2.3
+  cypress: cypress-io/cypress@1.29.0
   # different jobs are called later in the workflows sections
 jobs:
   build-test-deploy:
@@ -18,6 +19,20 @@ jobs:
       - eb/setup
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
+      # use Node v14.18.1
+      - run:
+          name: Swap node versions
+          command: |
+            set +e
+            wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | bash
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+            nvm install v14
+            nvm alias default 14.18.1
+
+            echo 'export NVM_DIR="$HOME/.nvm"' >> $BASH_ENV
+            echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
       # install dependencies for front-end application
       - run:
           name: Front-End Install
@@ -40,7 +55,7 @@ jobs:
             npm run backend:build
       # run back-end tests
       - run:
-          name: Back-End Tests
+          name: Back-End Unit and Integration Tests
           command: |
             npm run backend:test
       - run:
@@ -48,22 +63,32 @@ jobs:
           command: |
             google-chrome --version
             chromedriver --version
-      # run front-end tests
+      # run front-end unit tests
       - run:
-          name: Front-End Tests
+          name: Front-End Unit Tests
           command: |
             npm run frontend:test
-      # Deploy back-end application artifacts to Elastic Beanstalk
+      # deploy back-end application artifacts to Elastic Beanstalk
       - run:
           name: Back-End Deploy
           command: |
             npm run backend:deploy
-      # Deploy front-end application artifacts to Simple Storage Service
+      # deploy front-end application artifacts to Simple Storage Service
       - run:
           name: Front-End Deploy
           command: |
             npm run frontend:deploy
 workflows:
-  mystore-workflow:
+  mystore-build-test-deploy-workflow:
     jobs:
+      # build, test, deploy
       - build-test-deploy
+      # run Cypress end-to-end tests
+      - cypress/run:
+          requires:
+            - build-test-deploy
+          executor: cypress/base-12-14-0
+          working_directory: mystore-project-frontend
+          start: npm run start-e2e
+          wait-on: 'http://localhost:4200'
+          store_artifacts: false
