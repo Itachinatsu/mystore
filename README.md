@@ -37,6 +37,12 @@ This full stack application is deployed with a CircleCI continuous integration p
 
 ![alt text](https://github.com/markdeleon01/mystore-fullstack/blob/main/screenshots/circleci-build-test-deploy.png "CircleCI")
 
+
+All the secrets found in the application are configured inside CircleCi and passed to the production application.
+
+![alt text](https://github.com/markdeleon01/mystore-fullstack/blob/main/screenshots/circleci-secrets.png "CircleCI secrets configuration")
+
+
 ---
 
 ## Documentation
