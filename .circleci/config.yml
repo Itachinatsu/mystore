@@ -109,7 +109,6 @@ workflows:
           requires:
             - backend-build-test-deploy
       - cypress/run:
-          name: 4 machines
           requires:
             - cypress/install
           executor: cypress/base-12-14-0
