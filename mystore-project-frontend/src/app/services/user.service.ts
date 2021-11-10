@@ -4,6 +4,7 @@ import { User } from '../models/User';
 import { HttpClient } from '@angular/common/http'; // access the HTTP methods to make requests to a server via an API
 import { AuthenticateUserRes } from '../models/AuthenticateUserRes';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment'; // use environment-specific variables in the application
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +33,7 @@ export class UserService {
       password: password
     }
   
-    return this.http.post<AuthenticateUserRes>('http://mystorebackend-env-2.eba-upfexrmm.us-east-1.elasticbeanstalk.com/users/login', requestBody)
+    return this.http.post<AuthenticateUserRes>(environment.apiUrl+'/users/login', requestBody)
   }
   
   createAccount(firstName: string, lastName: string, password: string): Observable<AuthenticateUserRes> {
@@ -43,7 +44,7 @@ export class UserService {
       password: password
     }
   
-    return this.http.post<AuthenticateUserRes>('http://mystorebackend-env-2.eba-upfexrmm.us-east-1.elasticbeanstalk.com/users/register', requestBody)
+    return this.http.post<AuthenticateUserRes>(environment.apiUrl+'/users/register', requestBody)
   }
 
   getUser(): User {

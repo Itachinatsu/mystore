@@ -3,6 +3,7 @@
         "frontend:install": "cd mystore-project-frontend && npm install",
         "backend:install": "cd mystore-project-backend && npm install",
         "frontend:build": "cd mystore-project-frontend && npm run build",
+        "frontend:build-prod": "cd mystore-project-frontend && npm run build-prod",
         "backend:build": "cd mystore-project-backend && npm run build",
         "backend:test": "cd mystore-project-backend && npm run test",
         "frontend:test": "cd mystore-project-frontend && npm run test",
