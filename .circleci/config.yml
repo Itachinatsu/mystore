@@ -8,6 +8,42 @@ orbs:
   cypress: cypress-io/cypress@1.29.0
   # different jobs are called later in the workflows sections
 jobs:
+  backend-build-test:
+    docker:
+      # the base image can run most needed actions with orbs
+      - image: 'cimg/base:stable'
+    steps:
+      - node/install
+      - checkout
+      # use Node v14.18.1
+      - run:
+          name: Swap node versions
+          command: |
+            set +e
+            wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | bash
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+            nvm install v14
+            nvm alias default 14.18.1
+
+            echo 'export NVM_DIR="$HOME/.nvm"' >> $BASH_ENV
+            echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
+      # install dependencies for back-end application
+      - run:
+          name: Back-End Install
+          command: |
+            npm run backend:install
+      # build back-end application
+      - run:
+          name: Back-End Build
+          command: |
+            npm run backend:build
+      # run back-end tests
+      - run:
+          name: Back-End Unit and Integration Tests
+          command: |
+            npm run backend:test
   backend-build-test-deploy:
     docker:
       # the base image can run most needed actions with orbs
@@ -50,14 +86,13 @@ jobs:
           name: Back-End Deploy
           command: |
             npm run backend:deploy
-  frontend-build-test-deploy:
+  frontend-build-test:
     docker:
       # the base image can run most needed actions with orbs
       - image: 'cimg/base:stable'
     steps:
       - node/install
       - checkout
-      - aws-cli/setup
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
       # use Node v14.18.1
@@ -94,6 +129,50 @@ jobs:
           name: Front-End Unit Tests
           command: |
             npm run frontend:test
+  frontend-build-test-deploy:
+    docker:
+      # the base image can run most needed actions with orbs
+      - image: 'cimg/base:stable'
+    steps:
+      - node/install
+      - checkout
+      - aws-cli/setup
+      - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
+      # use Node v14.18.1
+      - run:
+          name: Swap node versions
+          command: |
+            set +e
+            wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | bash
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+            nvm install v14
+            nvm alias default 14.18.1
+
+            echo 'export NVM_DIR="$HOME/.nvm"' >> $BASH_ENV
+            echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
+      # install dependencies for front-end application
+      - run:
+          name: Front-End Install
+          command: |
+            npm run frontend:install
+      # build front-end application
+      - run:
+          name: Front-End Build
+          command: |
+            npm run frontend:build-prod
+      - run:
+          name: Check browser installation
+          command: |
+            google-chrome --version
+            chromedriver --version
+      # run front-end unit tests
+      - run:
+          name: Front-End Unit Tests
+          command: |
+            npm run frontend:test
       # deploy front-end application artifacts to Simple Storage Service
       - run:
           name: Front-End Deploy
@@ -102,25 +181,53 @@ jobs:
 workflows:
   mystore-build-test-deploy-workflow:
     jobs:
-      # backend: build, test, deploy
-      - backend-build-test-deploy
+      # backend: build & test - for PRs
+      - backend-build-test:
+          filters:
+            branches:
+              ignore:
+                - main
+      # frontend: build & test - for PRs
+      - frontend-build-test:
+          filters:
+            branches:
+              ignore:
+                - main
+      # backend: build, test, deploy - for main
+      - backend-build-test-deploy:
+          filters:
+            branches:
+              only:
+                - main
       # run Cypress end-to-end tests
       - cypress/install:
           requires:
             - backend-build-test-deploy
+          filters:
+            branches:
+              only:
+                - main
       - cypress/run:
           requires:
             - cypress/install
           executor: cypress/base-12-14-0
           working_directory: mystore-project-frontend
-          start: npm run start-e2e
+          start: npm run start-e2e-prod
           wait-on: 'http://localhost:4200'
           record: true
           store_artifacts: true
           parallel: true
           parallelism: 4
           group: 4 machines
+          filters:
+            branches:
+              only:
+                - main
       # frontend: build, test, deploy
       - frontend-build-test-deploy:
           requires:
             - cypress/run
+          filters:
+            branches:
+              only:
+                - main

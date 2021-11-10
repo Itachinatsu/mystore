@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Product } from '../models/Product';
 import { Observable } from 'rxjs'; //access to a stream of data returned from the API
 import { HttpClient } from '@angular/common/http'; // access the HTTP methods to make requests to a server via an API
+import { environment } from '../../environments/environment'; // use environment-specific variables in the application
 
 @Injectable({
   providedIn: 'root'
@@ -25,11 +26,11 @@ export class ProductService {
   }
 
   getProductList(): Observable<Product[]> {
-    return this.http.get<Product[]>('http://mystorebackend-env-2.eba-upfexrmm.us-east-1.elasticbeanstalk.com/products')
+    return this.http.get<Product[]>(environment.apiUrl+'/products')
   }
 
   getProduct(productId: number): Observable<Product> {
-    return this.http.get<Product>('http://mystorebackend-env-2.eba-upfexrmm.us-east-1.elasticbeanstalk.com/products/'+productId+'/details')
+    return this.http.get<Product>(environment.apiUrl+'/products/'+productId+'/details')
   }
 
   setProducts(products: Product[]): void {

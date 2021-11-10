@@ -4,12 +4,15 @@
   "description": "MyStore Front-end Web App",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --configuration production",
+    "start-dev": "ng serve",
     "build": "ng build",
+    "build-prod": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "chmod +x ./bin/test.sh && ./bin/test.sh",
     "deploy": "chmod +x ./bin/deploy.sh && ./bin/deploy.sh",
     "start-e2e": "npm install && npm run build && npm run start",
+    "start-e2e-prod": "npm install && npm run build-prod && npm run start-prod",
     "test-e2e": "ng run mystore-frontend:cypress-open",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run"

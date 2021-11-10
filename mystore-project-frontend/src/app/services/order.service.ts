@@ -7,6 +7,7 @@ import { CartService } from './cart.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http'; // access the HTTP methods to make requests to a server via an API
 import { OrderRes } from '../models/OrderRes';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment'; // use environment-specific variables in the application
 
 @Injectable({
   providedIn: 'root'
@@ -59,7 +60,7 @@ export class OrderService {
     }
 
     // call the backend API to place the order (persist on the backend)
-    return this.http.post<OrderRes>('http://mystorebackend-env-2.eba-upfexrmm.us-east-1.elasticbeanstalk.com/users/'+this.userService.getUser().id+'/order/new', requestBody, this.getRequestHeaders())
+    return this.http.post<OrderRes>(environment.apiUrl+'/users/'+this.userService.getUser().id+'/order/new', requestBody, this.getRequestHeaders())
   }
 
   setPlacedOrder(o: OrderRes) {
@@ -77,11 +78,11 @@ export class OrderService {
   }
 
   getOrders(): Observable<OrderRes[]> {
-    return this.http.get<OrderRes[]>('http://mystorebackend-env-2.eba-upfexrmm.us-east-1.elasticbeanstalk.com/users/'+this.userService.getUser().id+'/orders', this.getRequestHeaders())
+    return this.http.get<OrderRes[]>(environment.apiUrl+'/users/'+this.userService.getUser().id+'/orders', this.getRequestHeaders())
   }
 
   getOrder(orderId: number): Observable<OrderRes> {
-    return this.http.get<OrderRes>('http://mystorebackend-env-2.eba-upfexrmm.us-east-1.elasticbeanstalk.com/users/'+this.userService.getUser().id+'/order/'+orderId, this.getRequestHeaders())
+    return this.http.get<OrderRes>(environment.apiUrl+'/users/'+this.userService.getUser().id+'/order/'+orderId, this.getRequestHeaders())
   }
 
   clearPlacedOrder(): void {
