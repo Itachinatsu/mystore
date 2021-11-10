@@ -6,5 +6,6 @@
   "pluginsFile": "cypress/plugins/index.ts",
   "fixturesFolder": "cypress/fixtures",
   "video": false,
+  "projectId": "2ei4qy",
   "baseUrl": "http://localhost:4200"
 }

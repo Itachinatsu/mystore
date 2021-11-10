@@ -8,7 +8,49 @@ orbs:
   cypress: cypress-io/cypress@1.29.0
   # different jobs are called later in the workflows sections
 jobs:
-  build-test-deploy:
+  backend-build-test-deploy:
+    docker:
+      # the base image can run most needed actions with orbs
+      - image: 'cimg/base:stable'
+    steps:
+      - node/install
+      - checkout
+      - eb/setup
+      # use Node v14.18.1
+      - run:
+          name: Swap node versions
+          command: |
+            set +e
+            wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | bash
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+            nvm install v14
+            nvm alias default 14.18.1
+
+            echo 'export NVM_DIR="$HOME/.nvm"' >> $BASH_ENV
+            echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
+      # install dependencies for back-end application
+      - run:
+          name: Back-End Install
+          command: |
+            npm run backend:install
+      # build back-end application
+      - run:
+          name: Back-End Build
+          command: |
+            npm run backend:build
+      # run back-end tests
+      - run:
+          name: Back-End Unit and Integration Tests
+          command: |
+            npm run backend:test
+      # deploy back-end application artifacts to Elastic Beanstalk
+      - run:
+          name: Back-End Deploy
+          command: |
+            npm run backend:deploy
+  frontend-build-test-deploy:
     docker:
       # the base image can run most needed actions with orbs
       - image: 'cimg/base:stable'
@@ -16,7 +58,6 @@ jobs:
       - node/install
       - checkout
       - aws-cli/setup
-      - eb/setup
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
       # use Node v14.18.1
@@ -38,26 +79,11 @@ jobs:
           name: Front-End Install
           command: |
             npm run frontend:install
-      # install dependencies for back-end application
-      - run:
-          name: Back-End Install
-          command: |
-            npm run backend:install
       # build front-end application
       - run:
           name: Front-End Build
           command: |
             npm run frontend:build
-      # build back-end application
-      - run:
-          name: Back-End Build
-          command: |
-            npm run backend:build
-      # run back-end tests
-      - run:
-          name: Back-End Unit and Integration Tests
-          command: |
-            npm run backend:test
       - run:
           name: Check browser installation
           command: |
@@ -68,11 +94,6 @@ jobs:
           name: Front-End Unit Tests
           command: |
             npm run frontend:test
-      # deploy back-end application artifacts to Elastic Beanstalk
-      - run:
-          name: Back-End Deploy
-          command: |
-            npm run backend:deploy
       # deploy front-end application artifacts to Simple Storage Service
       - run:
           name: Front-End Deploy
@@ -81,14 +102,19 @@ jobs:
 workflows:
   mystore-build-test-deploy-workflow:
     jobs:
-      # build, test, deploy
-      - build-test-deploy
+      # backend: build, test, deploy
+      - backend-build-test-deploy
       # run Cypress end-to-end tests
       - cypress/run:
           requires:
-            - build-test-deploy
+            - backend-build-test-deploy
           executor: cypress/base-12-14-0
           working_directory: mystore-project-frontend
           start: npm run start-e2e
           wait-on: 'http://localhost:4200'
           store_artifacts: false
+          record: true
+      # frontend: build, test, deploy
+      - frontend-build-test-deploy:
+          requires:
+            - cypress/run
