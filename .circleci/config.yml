@@ -105,9 +105,13 @@ workflows:
       # backend: build, test, deploy
       - backend-build-test-deploy
       # run Cypress end-to-end tests
-      - cypress/run:
+      - cypress/install:
           requires:
             - backend-build-test-deploy
+      - cypress/run:
+          name: 4 machines
+          requires:
+            - cypress/install
           executor: cypress/base-12-14-0
           working_directory: mystore-project-frontend
           start: npm run start-e2e
