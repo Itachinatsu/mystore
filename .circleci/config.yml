@@ -117,9 +117,6 @@ workflows:
           wait-on: 'http://localhost:4200'
           store_artifacts: false
           record: true
-          parallel: true
-          parallelism: 5
-          group: 5 machines
       # frontend: build, test, deploy
       - frontend-build-test-deploy:
           requires:
