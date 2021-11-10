@@ -5,7 +5,7 @@
   "screenshotsFolder": "cypress/screenshots",
   "pluginsFile": "cypress/plugins/index.ts",
   "fixturesFolder": "cypress/fixtures",
-  "video": false,
+  "video": true,
   "projectId": "2ei4qy",
   "baseUrl": "http://localhost:4200"
 }
