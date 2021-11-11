@@ -6,6 +6,34 @@
       "user": {"ENV": "AWS_RDS_USERNAME"},
       "password": {"ENV": "AWS_RDS_PASSWORD"}
     },
+    "staging": {
+      "driver": "pg",
+      "host": {"ENV": "AWS_RDS_HOSTNAME_STAGING"},
+      "database": {"ENV": "AWS_RDS_DB_NAME"},
+      "user": {"ENV": "AWS_RDS_USERNAME"},
+      "password": {"ENV": "AWS_RDS_PASSWORD"}
+    },
+    "staging-test": {
+      "driver": "pg",
+      "host": {"ENV": "AWS_RDS_HOSTNAME_STAGING"},
+      "database": {"ENV": "AWS_RDS_TEST_DB"},
+      "user": {"ENV": "AWS_RDS_TEST_USER"},
+      "password": {"ENV": "AWS_RDS_TEST_PASSWORD"}
+    },
+    "prod": {
+      "driver": "pg",
+      "host": {"ENV": "AWS_RDS_HOSTNAME_PROD"},
+      "database": {"ENV": "AWS_RDS_DB_NAME"},
+      "user": {"ENV": "AWS_RDS_USERNAME"},
+      "password": {"ENV": "AWS_RDS_PASSWORD"}
+    },
+    "prod-test": {
+      "driver": "pg",
+      "host": {"ENV": "AWS_RDS_HOSTNAME_PROD"},
+      "database": {"ENV": "AWS_RDS_TEST_DB"},
+      "user": {"ENV": "AWS_RDS_TEST_USER"},
+      "password": {"ENV": "AWS_RDS_TEST_PASSWORD"}
+    },
     "test": {
       "driver": "pg",
       "host": {"ENV": "AWS_RDS_HOSTNAME"},

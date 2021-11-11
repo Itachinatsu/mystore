@@ -1,10 +1,13 @@
 import dotenv from 'dotenv'
 import pg from 'pg';
 import * as c from './config'
+//import { Logger } from 'tslog'
+
+//const log: Logger = new Logger()
 
 dotenv.config() // initializes the environment variables
 
-const { Pool } = pg;
+const { Pool } = pg
 
 const config = {
     host: c.config.dbhost,
@@ -14,6 +17,8 @@ const config = {
     password: c.config.password
 }
 
-const Client = new Pool(config);
+//log.debug('database:config='+JSON.stringify(config))
+
+const Client = new Pool(config)
 
 export default Client
