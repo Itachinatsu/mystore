@@ -1,7 +1,8 @@
 branch-defaults:
-  default:
+  main:
     environment: Mystorebackend-env-2
-    group_suffix: null
+  staging:
+    environment: Mystorebackendstaging-env
 deploy:
   artifact: dist/mystore-backend.zip
 global:

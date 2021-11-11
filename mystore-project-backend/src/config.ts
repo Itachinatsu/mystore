@@ -1,13 +1,52 @@
 import * as dotenv from "dotenv";
 dotenv.config();
 
+function getDbHost(): string {
+  // determine database host based on environment
+  if (process.env.ENV === 'staging') { 
+    return process.env.AWS_RDS_HOSTNAME_STAGING as string
+  } else if (process.env.ENV === 'prod') {
+    return process.env.AWS_RDS_HOSTNAME_PROD as string
+  } else {
+    // for dev or test
+    return process.env.AWS_RDS_HOSTNAME as string
+  }
+}
+
+function getDbName(): string {
+  // determine database name based on environment
+  if (process.env.TARGET_DB === 'test' || process.env.ENV === 'test') { 
+    return process.env.AWS_RDS_TEST_DB as string
+  } else {
+    return process.env.AWS_RDS_DB_NAME as string
+  }
+}
+
+function getDbUserName(): string {
+  // determine database username based on environment
+  if (process.env.TARGET_DB === 'test' || process.env.ENV === 'test') { 
+    return process.env.AWS_RDS_TEST_USER as string
+  } else {
+    return process.env.AWS_RDS_USERNAME as string
+  }
+}
+
+function getDbPassword(): string {
+  // determine database user password based on environment
+  if (process.env.TARGET_DB === 'test' || process.env.ENV === 'test') { 
+    return process.env.AWS_RDS_TEST_PASSWORD as string
+  } else {
+    return process.env.AWS_RDS_PASSWORD as string
+  }
+}
+
 export const config = {
-  dbhost: process.env.AWS_RDS_HOSTNAME,
+  dbhost: getDbHost(),
   dbport: Number(process.env.AWS_RDS_PORT),
 
-  database: process.env.ENV === 'dev' ? process.env.AWS_RDS_DB_NAME : process.env.AWS_RDS_TEST_DB,
-  username: process.env.ENV === 'dev' ? `${process.env.AWS_RDS_USERNAME}` : `${process.env.AWS_RDS_TEST_USER}`,
-  password: process.env.ENV === 'dev' ? `${process.env.AWS_RDS_PASSWORD}` : `${process.env.AWS_RDS_TEST_PASSWORD}`,
+  database: getDbName(),
+  username: getDbUserName(),
+  password: getDbPassword(),
 
   dialect: "postgres",
   env: process.env.ENV,
