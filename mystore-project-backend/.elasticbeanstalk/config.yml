@@ -1,9 +1,9 @@
 branch-defaults:
   main:
-    environment: Mystorebackend-env-2
+    environment: Mystorebackend-env
     application_name: mystorebackend
   staging:
-    environment: Mystorebackendstaging-env
+    environment: Mystorebackendstaging-env-1
     application_name: mystorebackend-staging
 deploy:
   artifact: dist/mystore-backend.zip
