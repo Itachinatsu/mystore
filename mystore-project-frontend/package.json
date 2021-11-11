@@ -15,7 +15,7 @@
     "test": "chmod +x ./bin/test.sh && ./bin/test.sh",
     "deploy": "chmod +x ./bin/deploy.sh && ./bin/deploy.sh",
     "deploy-prod": "chmod +x ./bin/deploy.sh && ./bin/deploy.sh",
-    "deploy-staging": "chmod +x ./bin/deploy.sh && ./bin/deploy-staging.sh",
+    "deploy-staging": "chmod +x ./bin/deploy-staging.sh && ./bin/deploy-staging.sh",
     "start-e2e": "npm install && npm run build && npm run start",
     "start-e2e-prod": "npm install && npm run build-prod && npm run start-prod",
     "start-e2e-staging": "npm install && npm run build-staging && npm run start-staging",
