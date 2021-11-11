@@ -15,7 +15,7 @@ function getDbHost(): string {
 
 function getDbName(): string {
   // determine database host based on environment
-  if (process.env.ENV === 'test') { 
+  if (process.env.TARGET_DB === 'test' || process.env.ENV === 'test') { 
     return process.env.AWS_RDS_TEST_DB as string
   } else {
     return process.env.AWS_RDS_DB_NAME as string

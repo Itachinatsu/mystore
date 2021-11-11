@@ -25,8 +25,8 @@
     "build": "npm run clean && tsc && cp database.json dist/database.json && cp .npmrc dist/.npmrc && cp package.json dist/package.json && cd dist && zip -r mystore-backend.zip . && cd ..",
     "build-staging": "export ENV='staging' && npm run clean && tsc && cp database.json dist/database.json && cp .npmrc dist/.npmrc && cp package.json dist/package.json && cd dist && zip -r mystore-backend.zip . && cd ..",
     "build-prod": "export ENV='prod' && npm run clean && tsc && cp database.json dist/database.json && cp .npmrc dist/.npmrc && cp package.json dist/package.json && cd dist && zip -r mystore-backend.zip . && cd ..",
-    "test-staging": "export ENV='staging' && tsc && db-migrate --env staging-test up && jasmine-ts && db-migrate reset --env staging-test",
-    "test-prod": "export ENV='prod' && tsc && db-migrate --env prod-test up && jasmine-ts && db-migrate reset --env prod-test",
+    "test-staging": "export ENV='staging' && export TARGET_DB='test' && tsc && db-migrate --env staging-test up && jasmine-ts && db-migrate reset --env staging-test",
+    "test-prod": "export ENV='prod' && export TARGET_DB='test' && tsc && db-migrate --env prod-test up && jasmine-ts && db-migrate reset --env prod-test",
     "test": "export ENV='test' && tsc && db-migrate --env test up && jasmine-ts && db-migrate reset --env test"
   },
   "author": "Mark de Leon",
