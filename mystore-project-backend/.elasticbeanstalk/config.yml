@@ -6,6 +6,7 @@ branch-defaults:
 deploy:
   artifact: dist/mystore-backend.zip
 global:
+  application_name: mystorebackend
   default_ec2_keyname: null
   default_platform: Node.js 14 running on 64bit Amazon Linux 2
   default_region: us-east-1
