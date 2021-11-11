@@ -5,6 +5,13 @@ branch-defaults:
     environment: Mystorebackendstaging-env-1
 deploy:
   artifact: dist/mystore-backend.zip
+environment-defaults:
+  Mystorebackend-env:
+    branch: null
+    repository: null
+  Mystorebackendstaging-env-1:
+    branch: null
+    repository: null
 global:
   application_name: mystorebackend
   default_ec2_keyname: null
