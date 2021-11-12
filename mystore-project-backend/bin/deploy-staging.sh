@@ -1,4 +1,4 @@
-cp config.yml-staging config.yml
+cp ../.elasticbeanstalk/config.yml-staging ../.elasticbeanstalk/config.yml
 
 eb list -a -v
 

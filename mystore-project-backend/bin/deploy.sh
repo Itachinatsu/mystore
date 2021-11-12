@@ -1,4 +1,4 @@
-cp config.yml-main config.yml
+cp ../.elasticbeanstalk/config.yml-main ../.elasticbeanstalk/config.yml
 
 eb list -a -v
 
