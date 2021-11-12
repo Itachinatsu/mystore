@@ -1,5 +1,3 @@
-cp ../.elasticbeanstalk/config.yml-main ../.elasticbeanstalk/config.yml
-
 eb list -a -v
 
 eb use Mystorebackend-env

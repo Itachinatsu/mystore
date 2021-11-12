@@ -1,5 +1,3 @@
-cp ../.elasticbeanstalk/config.yml-staging ../.elasticbeanstalk/config.yml
-
 eb list -a -v
 
 eb use Mystorebackendstaging-env-1
