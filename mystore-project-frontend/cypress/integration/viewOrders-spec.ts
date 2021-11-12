@@ -45,7 +45,7 @@ describe('MyStore : View Orders', () => {
                                 cy.get('.order-item-link').should('exist')
                                 cy.get('.order-item-link > a').should('exist')
 
-                                cy.get('.order-item-link > a').click()
+                                cy.get('.order-item-link > a').first().click()
                                     .then( () => {
                                         cy.get('.order-index-error').should('not.exist')
                                         cy.get('.order-details').should('exist')

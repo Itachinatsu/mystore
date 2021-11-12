@@ -16,6 +16,7 @@
         "backend:deploy-prod": "cd mystore-project-backend && npm run deploy-prod",
         "backend:deploy-staging": "cd mystore-project-backend && npm run deploy-staging",
         "frontend:deploy-prod": "cd mystore-project-frontend && npm run deploy-prod",
+        "frontend:deploy-staging": "cd mystore-project-frontend && npm run deploy-staging",
         "frontend:deploy": "cd mystore-project-frontend && npm run deploy"
     }
 }
