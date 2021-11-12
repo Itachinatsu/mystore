@@ -1,9 +1,6 @@
 import dotenv from 'dotenv'
 import pg from 'pg';
 import * as c from './config'
-import { Logger } from 'tslog'
-
-const log: Logger = new Logger()
 
 dotenv.config() // initializes the environment variables
 
