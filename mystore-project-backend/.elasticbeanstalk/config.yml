@@ -1,19 +1,13 @@
 branch-defaults:
-  main:
-    environment: Mystorebackend-env
+  default:
+    environment: Mystorebackendstaging-env-1
+    group_suffix: null
   staging:
     environment: Mystorebackendstaging-env-1
 deploy:
   artifact: dist/mystore-backend.zip
-environment-defaults:
-  Mystorebackend-env:
-    branch: null
-    repository: null
-  Mystorebackendstaging-env-1:
-    branch: null
-    repository: null
 global:
-  application_name: mystorebackend
+  application_name: mystorebackend-staging
   default_ec2_keyname: null
   default_platform: Node.js 14 running on 64bit Amazon Linux 2
   default_region: us-east-1

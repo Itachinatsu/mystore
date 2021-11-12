@@ -17,10 +17,6 @@ const config = {
     password: c.config.password
 }
 
-log.debug('database:config='+JSON.stringify(config))
-
 const Client = new Pool(config)
-
-log.debug('database:Client='+JSON.stringify(Client))
 
 export default Client
