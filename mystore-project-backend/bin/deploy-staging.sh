@@ -1,3 +1,5 @@
+cp config.yml-staging config.yml
+
 eb list -a -v
 
 eb use Mystorebackendstaging-env-1

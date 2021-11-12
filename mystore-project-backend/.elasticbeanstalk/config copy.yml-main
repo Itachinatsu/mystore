@@ -1,0 +1,20 @@
+branch-defaults:
+  default:
+    environment: Mystorebackend-env
+    group_suffix: null
+  main:
+    environment: Mystorebackend-env
+deploy:
+  artifact: dist/mystore-backend.zip
+global:
+  application_name: mystorebackend
+  default_ec2_keyname: null
+  default_platform: Node.js 14 running on 64bit Amazon Linux 2
+  default_region: us-east-1
+  include_git_submodules: true
+  instance_profile: null
+  platform_name: null
+  platform_version: null
+  profile: null
+  sc: git
+  workspace_type: Application

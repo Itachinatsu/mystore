@@ -4,6 +4,5 @@ package-lock.json
 .env
 
 # Elastic Beanstalk Files
-.elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml

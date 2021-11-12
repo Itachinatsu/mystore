@@ -1,3 +1,5 @@
+cp config.yml-main config.yml
+
 eb list -a -v
 
 eb use Mystorebackend-env
