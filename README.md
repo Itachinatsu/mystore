@@ -8,7 +8,7 @@ MyStore is a full stack application hosted on Amazon Web Services and is the fin
 
 UI:  http://mystorefrontend-bucket.s3-website-us-east-1.amazonaws.com
 
-API:  http://mystorebackend-env-2.eba-upfexrmm.us-east-1.elasticbeanstalk.com
+API: http://mystorebackend-env.eba-jydy275n.us-east-1.elasticbeanstalk.com
 
 
 ---
@@ -34,6 +34,13 @@ API:  http://mystorebackend-env-2.eba-upfexrmm.us-east-1.elasticbeanstalk.com
 ## CircleCI
 
 This full stack application is deployed with a CircleCI continuous integration pipeline.
+
+
+**Pipeline Highlights**:
+1. Able to run the unit, integration and end-to-end tests for both backend and front-end applications
+2. Able to do Pull Request builds against the *staging* and *main* branches
+3. Able to deploy PR code to the Staging environment and main branch code to the Production environment
+
 
 ![alt text](https://github.com/markdeleon01/mystore-fullstack/blob/main/screenshots/circleci-build-test-deploy.png "CircleCI")
 
