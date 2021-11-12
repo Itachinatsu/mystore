@@ -92,6 +92,9 @@
             "production": {
               "browserTarget": "mystore-frontend:build:production"
             },
+            "staging": {
+              "browserTarget": "mystore-frontend:build:staging"
+            },
             "development": {
               "browserTarget": "mystore-frontend:build:development"
             }

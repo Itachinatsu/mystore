@@ -5,6 +5,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start-prod": "ng serve --configuration production",
+    "start-staging": "ng serve --configuration staging",
+    "start-dev": "ng serve --configuration development",
     "build": "ng build",
     "build-prod": "ng build --configuration production",
     "build-staging": "ng build --configuration staging",
@@ -14,8 +17,8 @@
     "deploy-prod": "chmod +x ./bin/deploy.sh && ./bin/deploy.sh",
     "deploy-staging": "chmod +x ./bin/deploy-staging.sh && ./bin/deploy-staging.sh",
     "start-e2e": "npm install && npm run build && npm run start",
-    "start-e2e-prod": "npm install && npm run build-prod && npm run start",
-    "start-e2e-staging": "npm install && npm run build-staging && npm run start",
+    "start-e2e-prod": "npm install && npm run build-prod && npm run start-prod",
+    "start-e2e-staging": "npm install && npm run build-staging && npm run start-staging",
     "test-e2e": "ng run mystore-frontend:cypress-open",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run"
