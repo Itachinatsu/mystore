@@ -2,7 +2,7 @@
 
 [![CircleCI](https://circleci.com/gh/markdeleon01/mystore-fullstack/tree/main.svg?style=shield)](https://circleci.com/gh/markdeleon01/mystore-fullstack/tree/main)
 
-MyStore is a full stack application hosted on Amazon Web Services and is the final project under Udacity's Full Stack JavaScript Developer Nanodegree Program.
+MyStore is a full stack web application hosted on Amazon Web Services and is the final project under Udacity's Full Stack JavaScript Developer Nanodegree Program.
 
 ---
 
@@ -33,7 +33,7 @@ API: http://mystorebackend-env.eba-jydy275n.us-east-1.elasticbeanstalk.com
 
 ## CircleCI
 
-This full stack application is deployed with a CircleCI continuous integration pipeline.
+This full stack web application is deployed with a CircleCI continuous integration pipeline.
 
 
 **Pipeline Highlights**:
